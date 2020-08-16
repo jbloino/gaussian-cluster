@@ -1,0 +1,339 @@
+= Gaussian Cluster Tools Changelog
+:author: Julien Bloino
+:email: julien.bloino@sns.it
+:revnumber: 19.04.12
+:revremark: Added support for projects
+:toc: left
+:toclevels: 1
+:icons: font
+:stem:
+:source-highlighter: pygments
+:pygments-style: native
+
+== 2019-04-15
+
+* Added possibility to set a project name ('`-P`' in `qsub`) in `gxx_qsub`, using `-p` or `--project`.
+
+== 2019-03-25
+=== Fixed
+* Option for the temporary directory.
+
+== 2019-01-24
+=== Fixed
+* `gxx_qsub` incorrectly stated that the node did not have enough memory if a soft limit was put on the number of processors.
+* `gxx_qsub` was unable to compute the memory requirements if the user asked to keep the number processors unchanged (`kc`) but let the memory be set automatically.
+* New option to set up the temporary path for Gaussian execution in `gxx_qsub`.
+* Support for "SkyLake" architectures in `gxx_qsub`.
+
+== 2018-12-19
+=== Added
+* `gxx_qsub` checks the presence of soft and hard limits on the number of processors and RAM on each node family and acts accordingly to set up the default resources, warn the user or stops.
+
+== 2018-12-12
+=== Fixed
+* `%Mem` and `%NProcShared` values mixed in linked jobs (`gxx_qsub.py`)
+
+== 2018-12-03
+=== Fixed
+* Silent mode could be slow or fail as the node tried to access `/dev/null` on the head node.
+
+== 2018-11-06
+=== Added
+* Improved documentation.
+
+=== Fixed
+* Incorrect conversion of number of processors aliases in virtual queues to number of cores (`gxx_qsub.py`).
+
+== 2018-11-04
+=== Added
+* New script for developers to simplify the compilation of Gaussian or a working tree on multiple nodes: `gxx_build_cluster`
+
+== 2018-11-02
+=== Fixed
+* Error handling for wrong queue specification.
+* Incorrect evaluation of the number of processors needed to carry out multiple jobs in serial.
+
+== 2018-10-11
+=== Added
+* Support for *VantHoff* machines
+
+== 2018-10-10
+=== Added
+* Default paths to my directory for people linking my version of `gxx_qsub`.
+
+=== Fixed
+* Added check on the availability of module `typing` (only available on Python 3.5 and later).
+
+== 2018-10-08
+=== Fixed
+* Updated job management tools.
+
+=== Removed
+* HPC-centric library files (moved to a separate tree).
+
+== 2018-10-03
+=== Added
+* Support for new `hpcnodes` module. (`gxx_qsub.py`).
+
+=== Removed
+* Explicit references to the node architecture (`gxx_qsub.py`).
+
+== 2018-09-20
+=== Added
+* Support for special *q100* queues (`gxx_qsub.py`).
+
+== 2018-05-23
+=== Added
+* Gaussian internal version (I13+) supported (`gxx_qsub.py`).
+
+== 2018-03-12
+=== Added
+* G16.B01 supported (`gxx_qsub.py`).
+
+== 2017-05-15
+=== Added
+* Support for multiple input (parallel/serial) (`gxx_qsub.py`).
+
+=== Changed
+* Behavior of -k to overcome a problem with Python/`argparse` with `nargs` (`gxx_qsub.py`).
+
+== 2017-05-12
+=== Changed
+* Switched to gjf extensions for the temporary input file (`gxx_qsub.py`).
+* Switched to input/output form instead of stream in Gaussian call (`gxx_qsub.py`).
+
+== 2017-02-13
+=== Fixed
+* Bug with `-g` specifying an arbitrary path (Franco Egidi) (`gxx_qsub.py`).
+
+== 2017-02-09
+=== Added
+* Possibility to send notification mails (`gxx_qsub.py`).
+
+== 2017-02-02
+=== Added
+* G16.A03 supported (`gxx_qsub.py`).
+
+== 2016-01-21
+=== Added
+* G09.E01 supported (`gxx_qsub.py`).
+
+== 2015-10-21
+=== Added
+* Gaussian internal version (I04+) supported (`gxx_qsub.py`).
+* Support for *q07* queues (`gxx_qsub.py`).
+
+=== Removed
+* Support for *natta* nodes (`gxx_qsub.py`).
+
+== 2015-05-26
+=== Added
+* Gaussian internal version (I03+) supported (`gxx_qsub.py`).
+
+== 2015-04-03
+=== Added
+* Gaussian internal version (I03) supported (`gxx_qsub.py`).
+
+== 2015-01-13
+=== Added
+* Gaussian internal version (I02) supported (`gxx_qsub.py`).
+
+== 2015-03-09
+=== Added
+* Gaussian internal version (I02) supported (`gxx_qsub.py`).
+* Support for *Lee* queues (`gxx_qsub.py`).
+
+== 2014-12-16
+=== Added
+* Support for *Hoffmann* queues (`gxx_qsub.py`).
+* `-M` options to print details on the machines (`gxx_qsub.py`).
+* Gaussian internal version (I02) supported (`gxx_qsub.py`).
+
+=== Removed
+* Support for *Fukui* queues (`gxx_qsub.py`).
+
+== 2014-09-24
+=== Added
+* Gaussian internal version (H38+) supported (`gxx_qsub.py`).
+
+== 2014-06-18
+=== Added
+* Gaussian internal version (H37+) supported (`gxx_qsub.py`).
+
+== 2014-04-26
+=== Added
+* Gaussian internal version (H36) supported (`gxx_qsub.py`).
+
+== 2014-04-22
+=== Added
+* Gaussian internal version (H37+) supported (`gxx_qsub.py`).
+
+== 2014-04-10
+=== Added
+* Gaussian internal version (H36) supported (`gxx_qsub.py`).
+
+=== Changed
+* Default `gdv` to `gdvh36` (`gxx_qsub.py`).
+
+== 2014-02-21
+=== Added
+* Gaussian internal version (H35+) supported (`gxx_qsub.py`).
+
+== 2013-12-11
+=== Added
+* Support for *Curie* nodes (`gxx_qsub.py`).
+
+== 2013-11-27
+=== Fixed
+* Bug where `subgau.py` added the `%Chk` entry without removing the old one (`gxx_qsub.py`).
+
+== 2013-11-26
+=== Added
+* support for RWF in Gaussian input file (`gxx_qsub.py`).
+
+== 2013-11-17
+=== Added
+* Gaussian internal version (H32) supported (`gxx_qsub.py`).
+
+== 2013-09-16
+=== Added
+* Option to print information on submission process (`gxx_qsub.py`).
+
+== 2013-06-03
+=== Added
+* Gaussian internal version (H30) supported (`gxx_qsub.py`).
+
+== 2013-05-17
+=== Added
+* G09.D01 supported (`gxx_qsub.py`).
+
+=== Changed
+* *SubGau* is not anymore supported officially (`gxx_qsub.py`).
+
+== 2013-05-01
+=== Added
+* Gaussian internal version (H30) supported (`gxx_qsub.py`).
+
+== 2013-02-01
+=== Added
+* Gaussian internal version (G09.D01) supported (`gxx_qsub.py`).
+
+== 2013-01-09
+=== Added
+* Gaussian internal version (H28) supported (`gxx_qsub.py`).
+
+== 2012-11-30
+=== Added
+* Gaussian internal version (H25+) supported (`gxx_qsub.py`).
+
+== 2012-11-14
+=== Changed
+* Updated architecture flag for Fukui machines from `amd64-istanbul` to `amd64` (`gxx_qsub.py`).
+
+== 2012-10-23
+=== Added
+*  `max_usable_mem` field in `ARCHS` (`gxx_qsub.py`).
+
+=== Changed
+* Maximum memory used on *pople* machines to prevent possible crashes (`gxx_qsub.py`).
+
+== 2012-10-17
+=== Added
+* Copy back of `Test.FChk` if `FormCheck` (or aliases) is given in input (`gxx_qsub.py`).
+
+=== Fixed
+* Crash when input file did not have a final empty line. *SubGau* now prints a warning and exit (`gxx_qsub.py`).
+
+== 2012-10-11
+=== Added
+* Support for virtual queues (`gxx_qsub.py`).
+* Test on job name to comply with PBS rules (`gxx_qsub.py`).
+
+=== Fixed
+* Bug where `subgau.py` crashed if `LD_LIBRARY_PATH` and `PATH` are not set (`gxx_qsub.py`).
+
+== 2012-10-09
+=== Added
+* Support for *pople* machines (`gxx_qsub.py`).
+
+=== Changed
+* Migration to the new HPC infrastructure (`gxx_qsub.py`).
+* Conversion of the script to the new queues/filesystem (`gxx_qsub.py`).
+* The script now takes advantage of some features introduced in Python 2.6, which was not available in Scientific Linux 5 (`gxx_qsub.py`).
+* Changed username again. Created a special variable for it now... (`gxx_qsub.py`).
+
+=== Removed
+* Unsupported Gaussian versions (`gxx_qsub.py`).
+
+== 2012-05-30
+=== Added
+* Gaussian internal version (H21) supported (`gxx_qsub.py`).
+
+=== Fixed
+* Corrected internal documentation (`gxx_qsub.py`).
+
+== 2012-05-30
+=== Added
+* Gaussian internal version (H20) supported (`gxx_qsub.py`).
+
+=== Removed
+* Gaussian internal version (H19+) supported (`gxx_qsub.py`).
+
+== 2012-04-19
+=== Added
+* Gaussian internal version (H20+) supported (`gxx_qsub.py`).
+
+== 2012-04-09
+=== Added
+* Gaussian internal version (H19+) supported (`gxx_qsub.py`).
+
+== 2012-03-06
+=== Added
+* Option on property in resources for the job submitter (`gxx_qsub.py`).
+
+== 2012-03-02
+=== Added
+* Option for memory requirement in resources for the job submitter (`gxx_qsub.py`).
+
+== 2012-02-18
+=== Added
+* Possibility to designate a particular node to run calculations (`gxx_qsub.py`).
+
+== 2012-02-07
+=== Added
+* Support for new machine-dependent workings (`gxx_qsub.py`).
+
+== 2012-02-01
+=== Added
+* Support for machine-dependent paths (`gxx_qsub.py`).
+* Support for *chem2* queues (`gxx_qsub.py`).
+
+=== Changed
+* *SubGau* switched to official release
+
+=== Removed
+* Support for Gaussian internal versions (H10 and H11)
+
+== 2011-12-01
+=== Added
+* Gaussian internal version (H13) supported (`gxx_qsub.py`).
+
+== 2011-11-11
+=== Added
+* G09.C01 supported (`gxx_qsub.py`).
+
+== 2011-11-04
+=== Fixed
+* Corrected mess due to change of names... (`gxx_qsub.py`).
+
+== 2011-10-13
+=== Added
+* Gaussian internal version (H13) supported (`gxx_qsub.py`).
+
+== 2011-09-19
+=== Added
+* Gaussian internal version (H12+) supported (`gxx_qsub.py`).
+
+== 2011-06-24
+=== Added
+* Support for GDV.H12+ (`gxx_qsub.py`).

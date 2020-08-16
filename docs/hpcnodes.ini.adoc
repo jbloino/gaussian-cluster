@@ -1,0 +1,94 @@
+= Definition of hpcnodes.ini
+:author: Julien Bloino
+:email: julien.bloino@sns.it
+:revnumber: 18.10.11
+:revremark: Description of the keywords in the file.
+:toc: left
+:toclevels: 2
+:icons: font
+:stem:
+:source-highlighter: pygments
+:pygments-style: native
+
+== Introduction
+
+The `hpcnodes.ini` file contains general information on _families_ of nodes, which can be useful for job submission scripts or generic compilations (for instance for the machine-type flag).
+A _family_ represents an ensemble of nodes with the same properties.
+
+== Definition of the file
+
+The file contains 2 types of blocks:
+* General information (`[general]`)
+* Family-specific information (in the form `[family.__name__]`)
+
+NOTE: The parsing being done with the `ConfigParser` module of Python, the structure of the file should follow the specifications described in the documentation page of this module (https://docs.python.org/3/library/configparser.html).
+
+=== General information
+
+`QueueFormat`::
+    A Python format string (https://docs.python.org/3/library/string.html?#format-string-syntax).
+    Supported field names are:
++
+    `qtype`:::
+        Type of queue (given by `QueueType`)
+    `qname`:::
+        Name of the node in the queueing system (given by `QueueName`)
++
+Ex.: `q{qtype:02d}{qname}`
+`QueueType`::
+    Comma-separated list of basic types of queue, supported by all or most node families (only of interest for `QueueFormat`).
+
+=== Node Family specification
+
+`Name`::
+    Name of the family node (free string)
+`NodeCount`::
+    Number of nodes belonging to this family
+`QueueName`::
+    Name of the node family for the queue system (only of interest for `QueueFormat`)
+`QueueType`::
+    Comma-separated list of yypes of queues supported by the nodes family (only of interest for `QueueFormat`). +
+    `+` and `-` signs can be used to add or remove types present in the basic queue types list (from `[general]`)
+`QueueList`::
+    List of explicit queue names (no formatting used), separated by commas.
+`CPUCount`::
+    Number of physical processors per node.
+`CoreCount`::
+    Number of physical cores per processor.
+`CoreLogical`::
+    Boolean flag (True/False) indicating if logical cores are present (ex.: HyperThreading from Intel)
+`RAM`::
+    Available RAM per node (both binary- and SI-based units are supported).
+`Storage`::
+    Available disk storage for temporary files per node (both binary- and SI-based units are supported).
+`CPUModel`::
+    Model of the physical processors (free format).
+`CPUMaker`::
+    Name of the maker of the physical processors, in the most common form (ex: Intel, AMD, ARM...)
+`CPUArch`::
+    Processor microarchitecture, expected in a format compliant with compiler flags.
+`GPUCount`::
+    Number of GPUs per node.
+`GPUModel`::
+    Model of the GPUs (free format).
+`GPUMaker`::
+    Name of the maker of the physical processors, in the most common form (ex: NVidia, AMD...)
+`GPUArch`::
+    GPU architecture, expected in a format compliant with compiler flags.
+`PathTemp`::
+    Path to local directory where temporary files can be stored.
+    Python-compliant formats are supported.
+    User-specific paths can be indicated with the field name `username`. +
+    Ex: `/local/scratch/{username}`
+`UserGroups`::
+    Comma-separated list of user groups authorized to use this family of node.
+    If missing, all users are assumed to have access.
+`CPUSoftLimit`::
+    Maximum number of processors (cores) that users should use for standard jobs (soft limit).
+`CPUHardLimit`::
+    Maximum number of processors (cores) that users can use for any jobs (hard limit).
+`MemSoftLimit`::
+    Maximum memory that users should use for standard jobs (soft limit).
+`MemHardLimit`::
+    Maximum memory that users can use for any jobs (hard limit).
+    

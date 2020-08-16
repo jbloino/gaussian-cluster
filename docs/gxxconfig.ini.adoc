@@ -1,0 +1,155 @@
+= gxxconfig.ini
+:author: Julien Bloino
+:email: julien.bloino@sns.it
+:revnumber: 20.08.12
+:revremark: Description of the keywords in the file.
+:toc: left
+:toclevels: 2
+:icons: font
+:stem:
+:source-highlighter: pygments
+:pygments-style: native
+
+
+:Gaussian: pass:q[G[small]##AUSSIAN##]
+
+
+== Introduction
+
+The `gxxconfig.ini` file should contain all information relevant to run {Gaussian} on a HPC cluster.
+The configuration file also supports working trees.
+
+== Definition of the file
+
+The file contains 3 types of blocks:
+
+* Default information (`[DEFAULT]`)
+* Gaussian installations (`[g__xxx__.__rev__]`)
+* Working tree (`[__tag__.g__xxx__.__rev__]`)
+
+`g__xxx__` and `__rev__` are shorthands for the main versions and minor revisions of {Gaussian}.
+
+`__tag__` is generally the identifier of a maintainer of a working tree or a '`class`' of working trees.
+`def` can be used to refer to untagged working tree directories.
+
+NOTE: The parsing being done with the `ConfigParser` module of Python, the structure of the file should follow the specifications described in the documentation page of this module (https://docs.python.org/3/library/configparser.html).
+
+=== Default Values
+
+`RootPath`::
+    Root directory where versions of {Gaussian} are installed.
+`WorkPath`::
+    Root directory for working tree directories.
+    Multiple paths can be provided, separated by '`,`' +
+    Format: `[tag]:path`
+    `tag`:::
+        Label for the working (should be an identifier for the maintainer of the working tree).
+    `path`:::
+        Path to the working trees.
+`WorkInfo`::
+    Information on maintainers of working tree or contact for '`classes`' of working trees.
+    Multiple paths can be provided, separated by '`,`' +
+    Format: `[tag]:[name]:[email]`
+    `tag`:::
+        Label for the working (should be an identifier for the maintainer of the working tree).
+    `name`:::
+        Author/maintainer name
+    `email`:::
+        Email address
+`Machs`::
+    Default supported machine architectures.
+    The architectures can be {Gaussian} flag names or any internal naming.
+`Shared`::
+    List of users (comma-separated) allowed.
+    If missing or equal to `all` or `any`, every user can use it.
+
+=== Gaussian Installations
+
+[NOTE]
+====
+By default, the root path for a {Gaussian} installation is:
+
+`RootPath/BaseDir/Mach`
+
+with one directory per machine architecture.
+
+If only one architecture is used and users do not want to have the architecture directory, set the variable with empty value.
+====
+
+`Gaussian`::
+    Version of {Gaussian} (ex.: `G16`, `G09`...)
+`Revision`::
+    Minor Revision (ex.: `B.01`)
+`Name`::
+    Name to be displayed, which overrides the default: `Gaussian` Rev. `Revision`
+`Date`::
+    Release Date (format: YYYY/MM/DD)
+`BaseDir`::
+    Root directory of {Gaussian} inside `RootPath`. +
+    If `BaseDir` is absent, `RootPath` must be given.
+`RootPath`::
+    Overrides the default `RootPath`.
+`FullPath`::
+    Full path to {Gaussian} installation directory, which overrides the default built as `RootPath/BaseDir`, but keeps `Mach`
+`GDir`::
+    Gaussian directory (ex: `g09`, `g16`).
+    If not provided, Gaussian uses the first part of the section title, assumed to be `[g__xxx__.__rev__]`.
+`Machs`::
+    Default supported machine architectures.
+    The architectures can be {Gaussian} flag names or any internal naming. +
+    Multiple architectures are separated by ","
+`Workings`::
+    Associated workings (as tags)
+`Shared`::
+    List of users (comma-separated) allowed.
+    If missing or equal to `all` or `any`, every user can use it.
+
+=== Working Versions
+
+[NOTE]
+====
+By default, the root path of a working is built as,
+
+`WorkPath/BaseDir/Mach`
+
+with one directory per machine architecture.
+
+If only one architecture is used and users do not want to have the architecture directory, set the variable with empty value.
+
+For documentation paths, the Python format `{fullpath}` can be used to refer to the path save the machine architecture (the doc is not expected to be duplicated for each machine).
+====
+
+`Gaussian`::
+    Version of {Gaussian} (ex.: `G16`, `G09`...)
+`Revision`::
+    Minor Revision (ex.: `B.01`)
+`Name`::
+    Name to be displayed, which overrides the default: `Gaussian` Rev. `Revision`
+`Version`::
+    Version of the working tree
+`Date`::
+    Latest Update Date (format: YYYY/MM/DD)
+`BaseDir`::
+    Root directory of the {Gaussian} working tree `WorkPath`. +
+    If `BaseDir` is absent, `WorkPath` must be given.
+`WorkPath`::
+    Overrides the default `WorkPath`.
+`FullPath`::
+    Full path to {Gaussian} working tree directory, which overrides the default built as `WorkPath/BaseDir`, but keeps `Mach`
+`Shared`::
+    List of users (comma-separated) allowed.
+    If missing or equal to `all` or `any`, every user can use it.
+`Machs`::
+    Default supported machine architectures.
+    The architectures can be {Gaussian} flag names or any internal naming. +
+    Multiple architectures are separated by ","
+`Changelog`::
+    Changelog path.
+    Format can be specified as `path:format`.
++
+--
+NOTE: Multiple paths are supported by '`,`'.
+If all files have the same path, the extension or only the format can be provided.
+--
+`Docs`::
+    Other document files, as: `type:path:format`, one document per line
